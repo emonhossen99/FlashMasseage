@@ -1,0 +1,65 @@
+//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css
+//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css 
+.toast-success {
+     background-color: #51A351;
+ }
+.toast-error {
+     background-color: #BD362F;
+ } 
+ .toast-info { 
+    background-color: #2F96B4;
+ }
+  .toast-warning {
+background-color: #F89406; 
+}
+
+
+function flashMessage(status,message){
+     toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false, 
+        "progressBar": true, 
+        "positionClass": "toast-top-right", 
+        "preventDuplicates": false,
+        "onclick": null, 
+        "showDuration": "300",
+        "hideDuration": "1000", 
+        "timeOut": "5000", 
+        "extendedTimeOut": "1000",
+        "showEasing": "swing", 
+        "hideEasing": "linear", 
+        "showMethod": "fadeIn", 
+        "hideMethod": "fadeOut" 
+    } 
+    
+    
+    switch(status){ 
+        case 'success':
+          toastr.success(message);
+        break; 
+
+        case 'error': 
+          toastr.error(message);
+        break; 
+        
+        case 'info': 
+          toastr.info(message);
+        break;
+        
+        case 'warning': 
+          toastr.warning(message);
+        break;
+   }
+} 
+@if(session()->get('success'))
+   flashMessage('success',{{ session()->get('success') }}) 
+@elseif(session()->get('error')) 
+   flashMessage('error',{{ session()->get('error')  }}) 
+@elseif(session()->get('info')) 
+   flashMessage('info',{{ session()->get('info') }})
+@elseif(session()->get('warning')) 
+   flashMessage('warning',{{ session()->get('warning') }}) 
+@endif 
+return back()->with('success','message') 
+//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css
